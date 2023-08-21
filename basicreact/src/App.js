@@ -1,11 +1,11 @@
+import Chai from "./Chai";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-         <h1>saurabh</h1>
-      </header>
-    </div>
+    <>
+    <Chai/>
+    <h1>chai aur react|</h1>
+    </>
   );
 }
 
