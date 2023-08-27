@@ -10,7 +10,12 @@ function App() {
   //let Counter = 15
 
   const addValue = () =>{
-    setCounter(counter + 1);
+    // setCounter(counter + 1);
+
+    setCounter(prevCounter => prevCounter+1);
+    setCounter(prevCounter => prevCounter+1);
+    setCounter(prevCounter => prevCounter+1);
+    setCounter(prevCounter => prevCounter+1);
     
   }
 
