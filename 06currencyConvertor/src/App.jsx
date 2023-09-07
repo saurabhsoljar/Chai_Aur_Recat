@@ -1,35 +1,37 @@
+
+
 import { useState } from 'react'
-import { InputBox } from './components'
-import useCurrencyInfo from './hooks/useCurrencyinfo'
+import {InputBox} from './components'
+import useCurrencyInfo from './hooks/useCurrencyInfo'
 
 
 function App() {
-  
-  const [amount,setAmont] = useState(0)
+
+  const [amount, setAmount] = useState(0)
   const [from, setFrom] = useState("usd")
   const [to, setTo] = useState("inr")
   const [convertedAmount, setConvertedAmount] = useState(0)
 
-  const CurrencyInfo = useCurrencyInfo(from)
+  const currencyInfo = useCurrencyInfo(from)
 
-  const options = object.keys(CurrencyInfo)
+  const options = Object.keys(currencyInfo)
 
   const swap = () => {
     setFrom(to)
     setTo(from)
     setConvertedAmount(amount)
-    setAmont(convertedAmount)
+    setAmount(convertedAmount)
   }
-
-  const conver = () => {
-    setConvertedAmount(amount * CurrencyInfo[to])
+  
+  const convert = () => {
+    setConvertedAmount(amount * currencyInfo[to])
   }
 
   return (
     <div
         className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
         style={{
-            backgroundImage: `url('https://images.pexels.com/photos/3521353/pexels-photo-3521353.jpeg?auto=compress&cs=tinysrgb&w=600')`,
+            backgroundImage: `url('https://images.pexels.com/photos/3532540/pexels-photo-3532540.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')`,
         }}
     >
         <div className="w-full">
@@ -37,7 +39,8 @@ function App() {
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        conver()
+                        convert()
+                       
                     }}
                 >
                     <div className="w-full mb-1">
@@ -45,10 +48,9 @@ function App() {
                             label="From"
                             amount={amount}
                             currencyOptions={options}
-                            onCurrencyChange={(currency) => setAmont(amount)}
+                            onCurrencyChange={(currency) => setAmount(amount)}
                             selectCurrency={from}
-                            onAmountchange={(amount) => setAmont(amount)}
-
+                            onAmountChange={(amount) => setAmount(amount)}
                         />
                     </div>
                     <div className="relative w-full h-0.5">
