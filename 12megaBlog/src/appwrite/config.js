@@ -33,7 +33,7 @@ export class Serive{
         }
     }
 
-    async updatePost({slug, title, content,featuredImage, status, userId}){
+    async updatePost(slug, {title, content,featuredImage, status}){
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
@@ -74,6 +74,7 @@ export class Serive{
             )
         } catch (error) {
             console.log("Appwrite serive :: getPost :: error",error);
+            return false
         }
     }
 
