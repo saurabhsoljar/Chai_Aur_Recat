@@ -1,21 +1,21 @@
-import conf from "../conf/conf.js";
-import {Client, ID, Databases, Storage, Query} from "appwrite";
+import conf from '../conf/conf.js';
+import { Client, ID, Databases, Storage, Query } from "appwrite";
 
-export class Serive{
-    Client = new Client();
-    Databases;
+export class Service{
+    client = new Client();
+    databases;
     bucket;
-
+    
     constructor(){
         this.client
-            .setEndpoint(conf.appwriteUrl)
-            .setEndpoint(conf.appwriteProjectId);
-            this.databases = new Databases(this.client);
-            this.bucket = new Storage(this.client);
+        .setEndpoint(conf.appwriteUrl)
+        .setProject(conf.appwriteProjectId);
+        this.databases = new Databases(this.client);
+        this.bucket = new Storage(this.client);
     }
 
-    async creaePost ({title,slug, content,featuredImage, status, userId}){
-        try{
+    async createPost({title, slug, content, featuredImage, status, userId}){
+        try {
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
@@ -28,12 +28,12 @@ export class Serive{
                     userId,
                 }
             )
-        }catch(error){
+        } catch (error) {
             console.log("Appwrite serive :: createPost :: error", error);
         }
     }
 
-    async updatePost(slug, {title, content,featuredImage, status}){
+    async updatePost(slug, {title, content, featuredImage, status}){
         try {
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
@@ -44,10 +44,11 @@ export class Serive{
                     content,
                     featuredImage,
                     status,
+
                 }
             )
         } catch (error) {
-            console.log("Appwitr serive :: updatePost :: error", error);
+            console.log("Appwrite serive :: updatePost :: error", error);
         }
     }
 
@@ -57,10 +58,11 @@ export class Serive{
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug
+            
             )
             return true
         } catch (error) {
-            console.log("Appwrite serve :: deletePost :: error", error);
+            console.log("Appwrite serive :: deletePost :: error", error);
             return false
         }
     }
@@ -71,29 +73,32 @@ export class Serive{
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug
+            
             )
         } catch (error) {
-            console.log("Appwrite serive :: getPost :: error",error);
+            console.log("Appwrite serive :: getPost :: error", error);
             return false
         }
     }
 
-    async getPosts(queries = [Query.equal("status","active")]){
+    async getPosts(queries = [Query.equal("status", "active")]){
         try {
             return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 queries,
+                
+
             )
         } catch (error) {
-            console.log("Appwrite serive :: getPost :: error",error);
+            console.log("Appwrite serive :: getPosts :: error", error);
             return false
         }
     }
 
-    //file uplode service
+    // file upload service
 
-    async uplodeFile(file){
+    async uploadFile(file){
         try {
             return await this.bucket.createFile(
                 conf.appwriteBucketId,
@@ -101,7 +106,7 @@ export class Serive{
                 file
             )
         } catch (error) {
-            console.log("Appwrite serive :: uplodeFile :: error",error);
+            console.log("Appwrite serive :: uploadFile :: error", error);
             return false
         }
     }
@@ -114,7 +119,7 @@ export class Serive{
             )
             return true
         } catch (error) {
-            console.log("Appwrite serive :: deletFile :: error", error);
+            console.log("Appwrite serive :: deleteFile :: error", error);
             return false
         }
     }
@@ -127,7 +132,6 @@ export class Serive{
     }
 }
 
-const serive = new Serive()
 
-export default serive
-
+const service = new Service()
+export default service
