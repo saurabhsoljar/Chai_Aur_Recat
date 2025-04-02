@@ -13,10 +13,24 @@ function App() {
   //   }
   // };
 
-  //ternary condition
-  const addValue = () => {
-    setCounter((prevCounet) => (prevCounet === 100 ? 0 : prevCounet + 1));
+    const addValue = () => {
+    if (counter === 100) {
+      setCounter(0);
+    } else if (counter < 100) {
+      setCounter(counter + 1);
+      setCounter(counter + 1);
+      setCounter(counter + 1);
+      setCounter(counter + 1);
+      setCounter(counter + 1);
+      setCounter(counter + 1);
+    }
   };
+  
+
+  //ternary condition
+  // const addValue = () => {
+  //   setCounter((prevCounet) => (prevCounet === 100 ? 0 : prevCounet + 1));
+  // };
 
   // removeValue
   // const removeValue = () => {
@@ -27,10 +41,24 @@ function App() {
   //   }
   // };
 
-  //ternary condition
-  const removeValue = () => {
-    setCounter((prevCounet) => (prevCounet === 0 ? 100 : prevCounet - 1));
+    const removeValue = () => {
+    if (counter === 0) {
+      setCounter(100);
+    } else if (counter > 0) {
+      setCounter(counter - 1);
+      setCounter(counter - 1);
+      setCounter(counter - 1);
+      setCounter(counter - 1);
+      setCounter(counter - 1);
+      
+    }
   };
+  
+
+  //ternary condition
+  // const removeValue = () => {
+  //   setCounter((prevCounet) => (prevCounet === 0 ? 100 : prevCounet - 1));
+  // };
 
   return (
     <>
